@@ -9,7 +9,7 @@ data class Books(
     data class Book(
         val id: Int,
         val name: String,
-        val discription: String? = null,
+        val description: String? = null,
         val image: String? = null
     )
 }

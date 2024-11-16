@@ -75,7 +75,6 @@ class MainActivity : ComponentActivity() {
         Scaffold(
             topBar = { topBar() },
             containerColor = Color.Black,
-//            contentColor = Color.Black
         ) { innerPadding ->
             LazyColumn {
                 items(
@@ -124,7 +123,7 @@ class MainActivity : ComponentActivity() {
                                 .height(130.dp)
                                 .width(270.dp),
                         ){
-                            Text(text = book.discription.toString())
+                            Text(text = book.description.toString())
                         }
                     }
                 }
