@@ -8,14 +8,20 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.example.samplewithjcandspabase.ui.theme.SampleWithJCAndSpaBaseTheme
@@ -52,28 +58,75 @@ class SubActivity : ComponentActivity() {
     fun BookDetail(bookData: Books.Book) {
         Scaffold(
             containerColor = Color.Black
-        ) { innerPadding ->
+        ) {
             Column(
                 modifier = Modifier
-                    .padding(innerPadding)
+                    .padding(it)
                     .fillMaxWidth()
                     .padding(start = 10.dp, end = 10.dp, top = 10.dp)
-                    .clip(RoundedCornerShape(20.dp))
-                    .height(230.dp)
-                    .background(colorResource(id = R.color.book_orange)),
             ) {
                 Image(
                     painter = rememberImagePainter(bookData.image),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(80.dp)
-                        .clip(RoundedCornerShape(20)),
-                    contentScale = ContentScale.Crop
+                        .height(230.dp)
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.Fit
                 )
-                Text(text = bookData.name)
-                Text(text = bookData.description ?: "")
+                Text(
+                    bookData.name,
+                    modifier = Modifier.padding(start = 8.dp, top = 8.dp),
+                    color = colorResource(id = R.color.book_orange),
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = with(LocalDensity.current) { 23.dp.toSp() }
+                )
+                Column {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 10.dp, end = 10.dp, top = 10.dp)
+                            .clip(RoundedCornerShape(5.dp))
+                            .height(230.dp)
+                            .background(colorResource(id = R.color.book_orange3))
+                    ) {
+                        Column() {
+                            Text(text = bookData.description ?: "")
+                        }
+                    }
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.CenterEnd
+                    ) {
+                        if (bookData.star == 0) {
+                            NoStarText()
+                        } else {
+                            LazyRow {
+                                items(count = bookData.star) {
+                                    Icon(
+                                        modifier = Modifier
+                                            .size(50.dp)
+                                            .padding(3.dp),
+                                        tint = Color.Yellow,
+                                        imageVector = Icons.Filled.Star,
+                                        contentDescription = null
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+    }
+
+    @Composable
+    private fun NoStarText() {
+        Text(
+            "This book has not yet been rated.",
+            color = colorResource(id = R.color.book_orange),
+            fontWeight = FontWeight.SemiBold,
+            fontSize = with(LocalDensity.current) { 17.dp.toSp() }
+        )
     }
 
     companion object {

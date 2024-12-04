@@ -10,6 +10,7 @@ data class Books(
         val id: Int,
         val name: String,
         val description: String? = null,
-        val image: String? = null
+        val image: String? = null,
+        val star: Int = 0
     )
 }

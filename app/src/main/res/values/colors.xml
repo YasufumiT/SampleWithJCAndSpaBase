@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="book_orange">#ffa500</color>
-    <color name="book_orange2">#ffd280</color>
+    <color name="book_back">#e2dbcf</color>
+    <color name="book_orange">#edc682</color>
+    <color name="book_orange2">#df9920</color>
+    <color name="book_orange3">#ffa200</color>
 </resources>
