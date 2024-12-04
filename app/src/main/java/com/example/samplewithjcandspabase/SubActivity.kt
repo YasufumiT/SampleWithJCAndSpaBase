@@ -76,7 +76,7 @@ class SubActivity : ComponentActivity() {
                 Text(
                     bookData.name,
                     modifier = Modifier.padding(start = 8.dp, top = 8.dp),
-                    color = colorResource(id = R.color.book_orange),
+                    color = colorResource(id = R.color.book_orange3),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = with(LocalDensity.current) { 23.dp.toSp() }
                 )
@@ -89,27 +89,39 @@ class SubActivity : ComponentActivity() {
                             .height(230.dp)
                             .background(colorResource(id = R.color.book_orange3))
                     ) {
-                        Column() {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(10.dp)
+                        ) {
                             Text(text = bookData.description ?: "")
                         }
                     }
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.CenterEnd
-                    ) {
-                        if (bookData.star == 0) {
-                            NoStarText()
-                        } else {
-                            LazyRow {
-                                items(count = bookData.star) {
-                                    Icon(
-                                        modifier = Modifier
-                                            .size(50.dp)
-                                            .padding(3.dp),
-                                        tint = Color.Yellow,
-                                        imageVector = Icons.Filled.Star,
-                                        contentDescription = null
-                                    )
+                    Box {
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.End
+                        ) {
+                            Text(
+                                "¥${bookData.price}",
+                                color = colorResource(id = R.color.book_orange2),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = with(LocalDensity.current) { 38.dp.toSp() }
+                            )
+                            if (bookData.star == 0) {
+                                NoStarText()
+                            } else {
+                                LazyRow {
+                                    items(count = bookData.star) {
+                                        Icon(
+                                            modifier = Modifier
+                                                .size(50.dp)
+                                                .padding(3.dp),
+                                            tint = Color.Yellow,
+                                            imageVector = Icons.Filled.Star,
+                                            contentDescription = null
+                                        )
+                                    }
                                 }
                             }
                         }

@@ -78,7 +78,7 @@ class MainActivity : ComponentActivity() {
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 item {
-                    SearchBar(innerPadding)
+                    SearchBar()
                 }
                 items(
                     books.books,
@@ -91,7 +91,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun SearchBar(innerPadding: PaddingValues) {
+    private fun SearchBar() {
         var text by rememberSaveable { mutableStateOf("") }
         TextField(
             value = text,
@@ -157,16 +157,18 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Row {
+                        Row(
+                            horizontalArrangement = Arrangement.Center
+                        ) {
                             Text(
                                 "title:",
-                                modifier = Modifier.padding(start = 8.dp, top = 8.dp),
+                                modifier = Modifier.padding(start = 8.dp, top = 8.dp).alignByBaseline(),
                                 color = colorResource(id = R.color.book_orange),
                                 fontWeight = FontWeight.SemiBold
                             )
                             Text(
                                 book.name,
-                                modifier = Modifier.padding(8.dp),
+                                modifier = Modifier.padding(8.dp).alignByBaseline(),
                                 fontWeight = FontWeight.Bold,
                                 color = colorResource(id = R.color.book_orange2),
                                 fontSize = with(LocalDensity.current) { 23.dp.toSp() }
@@ -200,7 +202,7 @@ class MainActivity : ComponentActivity() {
             ),
             title = {
                 Text(
-                    text = "Book List",
+                    text = "My Book List",
                     fontWeight = FontWeight.Bold,
                     color = colorResource(id = R.color.book_orange3)
                 )
